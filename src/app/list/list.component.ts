@@ -43,8 +43,6 @@ export class ListComponent implements OnInit {
     let selected = this.unselectedProviders.filter(x => x.id === id)[0];
     this.selectedProviders = this.selectedProviders.filter(x => x.id !== id);
 
-    console.log("selected", this.selectedProviders);
-    console.log("unselected", this.unselectedProviders);
     selected.isSelected = false;
   }
   ngOnInit() {}
