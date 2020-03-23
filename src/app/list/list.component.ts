@@ -6,30 +6,35 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./list.component.css"]
 })
 export class ListComponent implements OnInit {
-  public selectedProviders = [];
-  public unselectedProviders = [
-    {
-      id: "1",
-      name: "John",
-      address: "123 Greenway Blvd",
-      phone: "8991234321",
-      isSelected: false
-    },
-    {
-      id: "2",
-      name: "Mary",
-      address: "443 Windwhisper Road",
-      phone: "2233211903",
-      isSelected: false
-    },
-    {
-      id: "3",
-      name: "Jason",
-      address: "9992 Pumpkin Hollow",
-      phone: "4343219384",
-      isSelected: false
-    }
-  ];
+  public selectedProviders = JSON.parse(localStorage.getItem("selected")).length
+    ? JSON.parse(localStorage.getItem("selected"))
+    : [];
+  public unselectedProviders = JSON.parse(localStorage.getItem("unselected"))
+    .length
+    ? JSON.parse(localStorage.getItem("unselected"))
+    : [
+        {
+          id: "1",
+          name: "John",
+          address: "123 Greenway Blvd",
+          phone: "8991234321",
+          isSelected: false
+        },
+        {
+          id: "2",
+          name: "Mary",
+          address: "443 Windwhisper Road",
+          phone: "2233211903",
+          isSelected: false
+        },
+        {
+          id: "3",
+          name: "Jason",
+          address: "9992 Pumpkin Hollow",
+          phone: "4343219384",
+          isSelected: false
+        }
+      ];
 
   constructor() {}
   onSelectClickMe(id: string) {
@@ -37,6 +42,11 @@ export class ListComponent implements OnInit {
 
     this.selectedProviders.push(selected);
     selected.isSelected = true;
+    localStorage.setItem("selected", JSON.stringify(this.selectedProviders));
+    localStorage.setItem(
+      "unselected",
+      JSON.stringify(this.unselectedProviders)
+    );
   }
 
   onUnSelectClickMe(id: string) {
@@ -44,6 +54,13 @@ export class ListComponent implements OnInit {
     this.selectedProviders = this.selectedProviders.filter(x => x.id !== id);
 
     selected.isSelected = false;
+    localStorage.setItem("selected", JSON.stringify(this.selectedProviders));
+    localStorage.setItem(
+      "unselected",
+      JSON.stringify(this.unselectedProviders)
+    );
   }
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.unselectedProviders);
+  }
 }
