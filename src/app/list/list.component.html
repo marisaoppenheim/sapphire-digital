@@ -1,0 +1,47 @@
+<div class="list-container">
+  <h2>Providers</h2>
+  <div class="row">
+    <div *ngFor="let item of unselectedProviders">
+      <button
+        *ngIf="!item.isSelected"
+        class="ogButton"
+        (click)="onSelectClickMe(item.id)"
+      >
+        <div class="spacerAndBorder">
+          <div class="rowCenterRight">
+            <div class="flex">
+              <div class="boldCenter">
+                {{ item.name }}
+              </div>
+            </div>
+          </div>
+          <div class="flexStart">
+            {{ item.address }}
+          </div>
+          <div class="flexStart">
+            {{ item.phone }}
+          </div>
+        </div>
+      </button>
+
+      <div *ngIf="item.isSelected" class="spacerAndBorder">
+        <div class="rowCenterRight">
+          <div class="flex">
+            <div class="boldCenter">
+              {{ item.name }}
+            </div>
+          </div>
+          <button *ngIf="item.isSelected" (click)="onUnSelectClickMe(item.id)">
+            x
+          </button>
+        </div>
+        <div>
+          {{ item.address }}
+        </div>
+        <div>
+          {{ item.phone }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
